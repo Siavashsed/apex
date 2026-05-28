@@ -1,0 +1,226 @@
+/* ========================================================================
+   Apex Dental Journal global header partial
+   Used across all pages (index, about, lab/*, curriculum/*, articles).
+   Mounts via assets/header.js. Mobile-first, clinical luxury aesthetic.
+   ====================================================================== */
+
+:root {
+  --ap-hdr-bg: rgba(253, 252, 248, .88);
+  --ap-hdr-bg-solid: #fdfcf8;
+  --ap-hdr-fg: #1c2526;
+  --ap-hdr-muted: #5a6566;
+  --ap-hdr-accent: #0f6e6c;
+  --ap-hdr-accent-soft: rgba(15, 110, 108, .08);
+  --ap-hdr-border: rgba(15, 110, 108, .14);
+  --ap-hdr-h: 64px;
+}
+
+.ap-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: var(--ap-hdr-bg);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  border-bottom: 1px solid var(--ap-hdr-border);
+  color: var(--ap-hdr-fg);
+  transition: transform .3s cubic-bezier(.2,.7,.2,1), background .25s ease, box-shadow .25s ease;
+}
+.ap-header.is-hidden { transform: translate3d(0, -110%, 0); }
+.ap-header.is-condensed {
+  background: rgba(253, 252, 248, .96);
+  box-shadow: 0 8px 24px rgba(15, 110, 108, .08);
+}
+.ap-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: .65rem 1rem;
+  min-height: var(--ap-hdr-h);
+}
+
+.ap-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  color: var(--ap-hdr-fg);
+  text-decoration: none;
+  flex: 0 0 auto;
+}
+.ap-brand-mark {
+  width: 36px;
+  height: 36px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffffff 0%, #f1ece2 100%);
+  color: var(--ap-hdr-accent);
+  box-shadow: inset 0 0 0 1px rgba(15, 110, 108, .2), 0 1px 0 rgba(0, 0, 0, .04);
+}
+.ap-brand-text {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.ap-brand-name {
+  font-family: 'Estedad', 'Newsreader', serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: .02em;
+}
+.ap-brand-tagline {
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ap-hdr-muted);
+}
+
+.ap-nav { display: none; }
+.ap-nav.is-open {
+  display: block;
+  position: fixed;
+  inset: var(--ap-hdr-h) 0 0 0;
+  background: var(--ap-hdr-bg-solid);
+  padding: 1.5rem 1.25rem 5rem;
+  overflow: auto;
+  z-index: 55;
+}
+.ap-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.ap-nav-list li + li { border-top: 1px solid var(--ap-hdr-border); }
+.ap-nav-list a {
+  display: block;
+  padding: 1rem .25rem;
+  color: var(--ap-hdr-fg);
+  text-decoration: none;
+  font-size: 1.05rem;
+  min-height: 44px;
+}
+.ap-nav-list a:hover,
+.ap-nav-list a:focus-visible {
+  color: var(--ap-hdr-accent);
+}
+
+.ap-nav-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 44px;
+  height: 44px;
+  padding: 12px 10px;
+  background: transparent;
+  border: 1px solid var(--ap-hdr-border);
+  border-radius: 10px;
+  cursor: pointer;
+  margin-inline-start: auto;
+}
+.ap-nav-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--ap-hdr-fg);
+  border-radius: 2px;
+  transition: transform .25s ease, opacity .2s ease;
+}
+.ap-nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.ap-nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.ap-nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.ap-lang-switch {
+  display: none;
+  gap: .25rem;
+  border: 1px solid var(--ap-hdr-border);
+  border-radius: 999px;
+  padding: 3px;
+  margin-inline-start: .5rem;
+}
+.ap-lang-switch button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--ap-hdr-muted);
+  font-family: 'JetBrains Mono', 'Vazirmatn', system-ui, monospace;
+  font-size: .72rem;
+  letter-spacing: .06em;
+  padding: .35rem .65rem;
+  border-radius: 999px;
+  cursor: pointer;
+  min-height: 32px;
+  min-width: 36px;
+}
+.ap-lang-switch button:hover { color: var(--ap-hdr-fg); background: var(--ap-hdr-accent-soft); }
+.ap-lang-switch button.is-active {
+  background: var(--ap-hdr-accent);
+  color: #ffffff;
+}
+
+.ap-lang-dock {
+  position: fixed;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
+  transform: translateX(-50%);
+  display: inline-flex;
+  gap: .2rem;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(253, 252, 248, .96);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  border: 1px solid var(--ap-hdr-border);
+  z-index: 70;
+  box-shadow: 0 10px 30px rgba(15, 110, 108, .14);
+}
+.ap-lang-dock button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--ap-hdr-muted);
+  font-family: 'JetBrains Mono', 'Vazirmatn', system-ui, monospace;
+  font-size: .72rem;
+  letter-spacing: .06em;
+  padding: .4rem .75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  min-height: 36px;
+  min-width: 40px;
+}
+.ap-lang-dock button:hover { color: var(--ap-hdr-fg); }
+.ap-lang-dock button.is-active {
+  background: var(--ap-hdr-accent);
+  color: #ffffff;
+}
+
+body.ap-nav-open { overflow: hidden; }
+
+@media (min-width: 820px) {
+  .ap-header-inner { padding: .75rem 1.5rem; }
+  .ap-nav { display: block; }
+  .ap-nav .ap-nav-list {
+    flex-direction: row;
+    gap: .25rem;
+  }
+  .ap-nav-list li + li { border-top: 0; }
+  .ap-nav-list a {
+    padding: .55rem .85rem;
+    font-size: .92rem;
+    border-radius: 8px;
+    min-height: 36px;
+  }
+  .ap-nav-list a:hover { background: var(--ap-hdr-accent-soft); color: var(--ap-hdr-fg); }
+  .ap-nav-toggle { display: none; }
+  .ap-lang-switch { display: inline-flex; }
+  .ap-lang-dock { display: none; }
+}
+
+html[dir="rtl"] .ap-nav-list a { text-align: right; }
+html[dir="ltr"] .ap-nav-list a { text-align: left; }
