@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f6e6c">
+  <title>Plaque Score - Apex Lab</title>
+  <meta name="description" content="Five-question plaque self-check. Scored 0 to 12. Clinical guidance, not a diagnosis.">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=Estedad:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/header.css">
+  <script defer src="../assets/header.js"></script>
+  <style>
+    .ps{max-width:780px;margin:0 auto;padding:64px 24px 96px;color:#1c2526}
+    .ps-eye{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#0f6e6c;margin-bottom:18px}
+    .ps-h1{font-family:'Newsreader',Georgia,serif;font-size:clamp(36px,5vw,60px);font-weight:700;line-height:1.05;letter-spacing:-.02em;margin:0 0 18px}
+    .ps-lede{font-size:17px;line-height:1.55;color:#5a6566;max-width:54ch;margin:0 0 40px}
+    .ps-q{padding:24px 0;border-top:1px solid rgba(15,110,108,.14)}
+    .ps-q-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;color:#0f6e6c;margin-bottom:8px}
+    .ps-q-ask{font-family:'Newsreader',serif;font-size:19px;line-height:1.4;color:#1c2526;margin:0 0 16px;font-weight:500}
+    .ps-opts{display:flex;flex-direction:column;gap:8px}
+    .ps-opt{display:flex;align-items:center;gap:12px;padding:12px 16px;background:#fafaf7;border:1px solid rgba(15,110,108,.1);border-radius:6px;cursor:pointer;min-height:44px}
+    .ps-opt:hover{border-color:rgba(15,110,108,.3)}
+    .ps-opt.is-on{background:#0f6e6c;color:#fdfcf8;border-color:#0f6e6c}
+    .ps-opt input{accent-color:#0f6e6c;flex-shrink:0;width:18px;height:18px}
+    .ps-opt span{font-size:15px}
+    .ps-actions{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
+    .ps-btn{appearance:none;background:#0f6e6c;color:#fdfcf8;border:0;padding:14px 28px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;border-radius:6px;cursor:pointer;min-height:48px;letter-spacing:.04em}
+    .ps-btn:hover{background:#0c5856}
+    .ps-btn.ghost{background:transparent;color:#0f6e6c;border:1px solid rgba(15,110,108,.3)}
+    .ps-result{display:none;margin-top:36px;padding:32px;background:#fafaf7;border-left:4px solid #0f6e6c;border-radius:0 8px 8px 0}
+    .ps-result.show{display:block}
+    .ps-result.warn{border-left-color:#d97706}
+    .ps-result.bad{border-left-color:#dc2626}
+    .ps-band{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#0f6e6c;margin-bottom:10px;font-weight:500}
+    .ps-band.warn{color:#d97706}
+    .ps-band.bad{color:#dc2626}
+    .ps-score{font-family:'Newsreader',serif;font-size:42px;font-weight:700;line-height:1;letter-spacing:-.03em;margin:0 0 12px}
+    .ps-result h2{font-family:'Newsreader',serif;font-size:22px;font-weight:600;margin:0 0 12px;letter-spacing:-.01em}
+    .ps-result p{font-size:15px;line-height:1.65;color:#1c2526;margin:0 0 12px}
+    .ps-result ul{margin:0;padding-left:24px;font-size:15px;line-height:1.65;color:#1c2526}
+    .ps-disclaim{font-size:12px;color:#5a6566;text-align:center;padding-top:18px;border-top:1px solid rgba(15,110,108,.14);margin-top:36px;font-style:italic}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="ps">
+      <div class="ps-eye">LAB / PLAQUE SCORE</div>
+      <h1 class="ps-h1">A five question self check.</h1>
+      <p class="ps-lede">Honest answers in two minutes. The score is a rough plaque-control signal, not a diagnosis. Use it to decide whether you should be cleaning more thoughtfully, or booking the cleaning you have been putting off.</p>
+
+      <form id="psForm">
+        <div class="ps-q" data-q="bleed">
+          <div class="ps-q-num">01 / BLEEDING</div>
+          <p class="ps-q-ask">Do your gums bleed when you brush or floss?</p>
+          <div class="ps-opts">
+            <label class="ps-opt"><input type="radio" name="bleed" value="0"> <span>Never or rarely</span></label>
+            <label class="ps-opt"><input type="radio" name="bleed" value="1"> <span>Sometimes, with floss only</span></label>
+            <label class="ps-opt"><input type="radio" name="bleed" value="2"> <span>Often, including with brushing</span></label>
+          </div>
+        </div>
+        <div class="ps-q" data-q="visible">
+          <div class="ps-q-num">02 / VISIBLE PLAQUE</div>
+          <p class="ps-q-ask">After brushing, can you still see or feel a film on the gum line?</p>
+          <div class="ps-opts">
+            <label class="ps-opt"><input type="radio" name="visible" value="0"> <span>Teeth feel clean and look clear</span></label>
+            <label class="ps-opt"><input type="radio" name="visible" value="1"> <span>A faint film in places</span></label>
+            <label class="ps-opt"><input type="radio" name="visible" value="2"> <span>Yes, a clear yellow or white film</span></label>
+          </div>
+        </div>
+        <div class="ps-q" data-q="tongue">
+          <div class="ps-q-num">03 / TONGUE</div>
+          <p class="ps-q-ask">Is your tongue coated when you wake up?</p>
+          <div class="ps-opts">
+            <label class="ps-opt"><input type="radio" name="tongue" value="0"> <span>No, pink and clean</span></label>
+            <label class="ps-opt"><input type="radio" name="tongue" value="1"> <span>Light coating</span></label>
+            <label class="ps-opt"><input type="radio" name="tongue" value="2"> <span>Thick coating, white or yellow</span></label>
+          </div>
+        </div>
+        <div class="ps-q" data-q="breath">
+          <div class="ps-q-num">04 / BREATH</div>
+          <p class="ps-q-ask">Has anyone close to you mentioned your breath, or do you notice it yourself?</p>
+          <div class="ps-opts">
+            <label class="ps-opt"><input type="radio" name="breath" value="0"> <span>No, nobody has, you do not notice</span></label>
+            <label class="ps-opt"><input type="radio" name="breath" value="1"> <span>Sometimes in the morning</span></label>
+            <label class="ps-opt"><input type="radio" name="breath" value="2"> <span>Often, even after brushing</span></label>
+          </div>
+        </div>
+        <div class="ps-q" data-q="cleaning">
+          <div class="ps-q-num">05 / LAST CLEANING</div>
+          <p class="ps-q-ask">When was your last professional dental cleaning?</p>
+          <div class="ps-opts">
+            <label class="ps-opt"><input type="radio" name="cleaning" value="0"> <span>Within 6 months</span></label>
+            <label class="ps-opt"><input type="radio" name="cleaning" value="1"> <span>6 to 12 months ago</span></label>
+            <label class="ps-opt"><input type="radio" name="cleaning" value="2"> <span>1 to 2 years ago</span></label>
+            <label class="ps-opt"><input type="radio" name="cleaning" value="3"> <span>More than 2 years, or never</span></label>
+          </div>
+        </div>
+
+        <div class="ps-actions">
+          <button type="button" class="ps-btn" id="scoreBtn">See your score</button>
+          <button type="button" class="ps-btn ghost" id="resetBtn">Reset</button>
+        </div>
+      </form>
+
+      <div class="ps-result" id="result">
+        <div class="ps-band" id="band">RESULT</div>
+        <div class="ps-score" id="score">0 / 12</div>
+        <h2 id="title">-</h2>
+        <p id="summary">-</p>
+        <ul id="recs"></ul>
+      </div>
+
+      <div class="ps-disclaim">This tool does not replace clinical advice. Book a professional dental exam to confirm.</div>
+    </div>
+  </main>
+
+<script>
+(function(){
+  document.querySelectorAll('.ps-opts').forEach(function(grp){
+    grp.addEventListener('change', function(e){
+      grp.querySelectorAll('.ps-opt').forEach(function(o){ o.classList.toggle('is-on', o.querySelector('input').checked); });
+    });
+  });
+
+  var TIERS = [
+    [0, 3,  'low',  'Plaque control is in a healthy range.',
+     ['Maintain twice-daily brushing for two minutes with a soft brush.',
+      'Floss or use interdental brushes once daily before bed.',
+      'Keep your routine professional cleaning interval at 6 months.']],
+    [4, 7,  'mod',  'Moderate signs of plaque accumulation.',
+     ['Add an evening interdental clean (floss or interdental brushes) every day for the next month.',
+      'Brush for the full two minutes - use a timer if needed.',
+      'Add a fluoride mouth rinse at a separate time from brushing (so you do not wash the fluoride off the paste).',
+      'Book a cleaning if it has been more than 9 months.']],
+    [8, 12, 'high', 'High plaque signal. Tissue inflammation is likely.',
+     ['Book a professional cleaning within the next 4 weeks.',
+      'Twice-daily brushing with a fluoride paste of at least 1450 ppm.',
+      'Interdental cleaning every night without exception for 6 weeks.',
+      'If gums bleed for more than 2 weeks despite the routine, that warrants a periodontal assessment.']]
+  ];
+
+  document.getElementById('scoreBtn').addEventListener('click', function(){
+    var f = new FormData(document.getElementById('psForm'));
+    var keys = ['bleed','visible','tongue','breath','cleaning'];
+    var total = 0;
+    for (var i = 0; i < keys.length; i++) {
+      var v = f.get(keys[i]);
+      if (v === null) { alert('Please answer question ' + (i+1) + '.'); return; }
+      total += parseInt(v, 10);
+    }
+    var tier = TIERS.find(function(t){ return total >= t[0] && total <= t[1]; });
+    var bandEl = document.getElementById('band');
+    var resEl  = document.getElementById('result');
+    var cls = tier[2] === 'low' ? '' : (tier[2] === 'mod' ? 'warn' : 'bad');
+    resEl.className = 'ps-result show' + (cls ? ' ' + cls : '');
+    bandEl.className = 'ps-band' + (cls ? ' ' + cls : '');
+    bandEl.textContent = tier[2] === 'low' ? 'LOW PLAQUE SIGNAL' : tier[2] === 'mod' ? 'MODERATE PLAQUE SIGNAL' : 'HIGH PLAQUE SIGNAL';
+    document.getElementById('score').textContent = total + ' / 12';
+    document.getElementById('title').textContent  = tier[3];
+    document.getElementById('summary').textContent = '';
+    var ul = document.getElementById('recs');
+    ul.innerHTML = tier[4].map(function(r){ return '<li>' + r + '</li>'; }).join('');
+    resEl.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    document.getElementById('psForm').reset();
+    document.querySelectorAll('.ps-opt').forEach(function(o){ o.classList.remove('is-on'); });
+    document.getElementById('result').className = 'ps-result';
+  });
+})();
+</script>
+</body>
+</html>
