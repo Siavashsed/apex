@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f6e6c">
+  <title>Tooth Eruption Timeline - Apex Lab</title>
+  <meta name="description" content="Interactive eruption windows for primary and permanent teeth. Plain-language ranges parents can use.">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=Estedad:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/header.css">
+  <script defer src="../assets/header.js"></script>
+  <style>
+    .et{max-width:1080px;margin:0 auto;padding:64px 24px 96px;color:#1c2526}
+    .et-eye{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#0f6e6c;margin-bottom:18px}
+    .et-h1{font-family:'Newsreader',serif;font-size:clamp(36px,5vw,60px);font-weight:700;line-height:1.05;letter-spacing:-.02em;margin:0 0 18px}
+    .et-lede{font-size:17px;line-height:1.55;color:#5a6566;max-width:60ch;margin:0 0 32px}
+    .et-tabs{display:flex;gap:6px;margin-bottom:28px;flex-wrap:wrap}
+    .et-tab{appearance:none;background:transparent;border:1px solid rgba(15,110,108,.2);color:#0f6e6c;padding:9px 18px;font-family:'Inter',sans-serif;font-size:13px;font-weight:500;letter-spacing:.04em;border-radius:6px;cursor:pointer;min-height:40px}
+    .et-tab:hover{background:rgba(15,110,108,.05)}
+    .et-tab.is-on{background:#0f6e6c;color:#fdfcf8;border-color:#0f6e6c}
+    .et-table{width:100%;border-collapse:collapse;margin-bottom:14px;font-size:14px}
+    .et-table caption{text-align:left;font-family:'Newsreader',serif;font-size:18px;font-weight:600;letter-spacing:-.01em;color:#1c2526;padding:18px 0 10px}
+    .et-table th{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#0f6e6c;text-align:left;padding:10px 12px;background:#fafaf7;font-weight:500;border-bottom:1px solid rgba(15,110,108,.14)}
+    .et-table td{padding:10px 12px;border-bottom:1px solid rgba(15,110,108,.06)}
+    .et-table tr:hover td{background:rgba(15,110,108,.03)}
+    .et-bar-wrap{position:relative;width:100%;height:12px;background:#fafaf7;border-radius:6px;overflow:hidden}
+    .et-bar{position:absolute;top:0;bottom:0;background:linear-gradient(90deg,rgba(15,110,108,.25),#0f6e6c);border-radius:6px}
+    .et-tip{display:none;padding:14px 18px;background:#fafaf7;border-left:3px solid #0f6e6c;border-radius:0 6px 6px 0;font-size:14px;line-height:1.55;color:#1c2526;margin-bottom:28px}
+    .et-tip.show{display:block}
+    .et-disclaim{font-size:12px;color:#5a6566;text-align:center;padding-top:18px;border-top:1px solid rgba(15,110,108,.14);margin-top:36px;font-style:italic}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="et">
+      <div class="et-eye">LAB / ERUPTION TIMELINE</div>
+      <h1 class="et-h1">When teeth show up.</h1>
+      <p class="et-lede">A reference for parents and curious adults. Use the typical windows for orientation, not as a deadline. Variation of several months in either direction is normal and rarely cause for concern.</p>
+
+      <div class="et-tabs" role="tablist">
+        <button class="et-tab is-on" data-tab="primary">Primary (baby) teeth</button>
+        <button class="et-tab" data-tab="permanent">Permanent teeth</button>
+        <button class="et-tab" data-tab="all">All</button>
+      </div>
+
+      <div class="et-tip" id="parentTip">A useful rule: cleaning starts the day the first tooth appears. Wipe with a damp cloth, then a soft brush as more arrive. Stay away from sugary drinks in a bottle at bedtime.</div>
+
+      <table class="et-table">
+        <caption id="cap">Primary (baby) teeth</caption>
+        <thead>
+          <tr><th>Tooth</th><th>Erupts</th><th>Sheds</th><th>Range</th></tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+
+      <div class="et-disclaim">This tool does not replace clinical advice.</div>
+    </div>
+  </main>
+
+<script>
+(function(){
+  var PRIMARY = [
+    ['Lower central incisor',   '6 to 10 mo',  '6 to 7 yr', 6, 10],
+    ['Upper central incisor',   '8 to 12 mo',  '6 to 7 yr', 8, 12],
+    ['Upper lateral incisor',   '9 to 13 mo',  '7 to 8 yr', 9, 13],
+    ['Lower lateral incisor',  '10 to 16 mo',  '7 to 8 yr',10, 16],
+    ['Upper first molar',      '13 to 19 mo',  '9 to 11 yr',13, 19],
+    ['Lower first molar',      '14 to 18 mo',  '9 to 11 yr',14, 18],
+    ['Upper canine',           '16 to 22 mo', '10 to 12 yr',16, 22],
+    ['Lower canine',           '17 to 23 mo',  '9 to 12 yr',17, 23],
+    ['Lower second molar',     '23 to 31 mo', '10 to 12 yr',23, 31],
+    ['Upper second molar',     '25 to 33 mo', '10 to 12 yr',25, 33]
+  ];
+  var PERMANENT = [
+    ['Lower first molar',         '6 to 7 yr',   '-', 72, 84],
+    ['Upper first molar',         '6 to 7 yr',   '-', 72, 84],
+    ['Lower central incisor',     '6 to 7 yr',   '-', 72, 84],
+    ['Upper central incisor',     '7 to 8 yr',   '-', 84, 96],
+    ['Lower lateral incisor',     '7 to 8 yr',   '-', 84, 96],
+    ['Upper lateral incisor',     '8 to 9 yr',   '-', 96, 108],
+    ['Lower canine',              '9 to 10 yr',  '-', 108,120],
+    ['Upper first premolar',     '10 to 11 yr',  '-', 120,132],
+    ['Lower first premolar',     '10 to 12 yr',  '-', 120,144],
+    ['Upper second premolar',    '10 to 12 yr',  '-', 120,144],
+    ['Lower second premolar',    '11 to 12 yr',  '-', 132,144],
+    ['Upper canine',             '11 to 12 yr',  '-', 132,144],
+    ['Lower second molar',       '11 to 13 yr',  '-', 132,156],
+    ['Upper second molar',       '12 to 13 yr',  '-', 144,156],
+    ['Third molars (wisdom)',    '17 to 25 yr',  '-', 204,300]
+  ];
+  function maxRange(rows){ return rows.reduce(function(m,r){ return Math.max(m, r[4]); }, 0); }
+  function render(which){
+    var rows;
+    if (which === 'primary')   rows = PRIMARY;
+    else if (which === 'permanent') rows = PERMANENT;
+    else rows = PRIMARY.concat(PERMANENT);
+    document.getElementById('cap').textContent = which === 'primary' ? 'Primary (baby) teeth' : (which === 'permanent' ? 'Permanent teeth' : 'All teeth');
+    document.getElementById('parentTip').classList.toggle('show', which === 'primary');
+    var max = maxRange(rows);
+    var html = rows.map(function(r){
+      var startPct = (r[3] / max) * 100;
+      var widthPct = ((r[4] - r[3]) / max) * 100;
+      return '<tr><td><strong>' + r[0] + '</strong></td><td>' + r[1] + '</td><td>' + r[2] + '</td>' +
+             '<td><div class="et-bar-wrap"><div class="et-bar" style="left:' + startPct + '%;width:' + widthPct + '%"></div></div></td></tr>';
+    }).join('');
+    document.getElementById('tbody').innerHTML = html;
+  }
+  document.querySelectorAll('.et-tab').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.et-tab').forEach(function(x){ x.classList.remove('is-on'); });
+      b.classList.add('is-on');
+      render(b.getAttribute('data-tab'));
+    });
+  });
+  render('primary');
+})();
+</script>
+</body>
+</html>
