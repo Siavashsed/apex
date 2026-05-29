@@ -74,8 +74,6 @@ const STR = {
     "foot.about.p": "مجلهٔ دندانپزشکی اپکس، نهادی آموزشی است که بر آموزش پیشگیرانه و مبتنی بر شواهد در دندانپزشکی تمرکز دارد. مدیریت بالینی با دکتر توفیق صدیقی.",
     "foot.nav.title": "ناوبری",
     "foot.contact.title": "ارتباط",
-    "foot.contact.email": "ایمیل: [CONTACT EMAIL]",
-    "foot.contact.address": "نشانی: [CLINIC ADDRESS]، مهاباد",
     "foot.colophon": "© ۲۰۲۶ مجلهٔ دندانپزشکی اپکس. این محتوا برای آموزش عمومی است و جایگزین معاینهٔ بالینی نیست.",
     "foot.heritage": "با احترام به میراث مهاباد و کردستان",
 
@@ -95,17 +93,11 @@ const STR = {
     "about.tl.1964.y": "۱۳۴۳ / ۱۹۶۴",
     "about.tl.1964.e": "تولد در مهاباد",
     "about.tl.1964.n": "زادگاه در قلب کردستان ایران. کودکی در محیطی با ارزش آموزش، شعر و گفتگوی خانوادگی.",
-    "about.tl.school.y": "[YEAR ENROLLED]",
-    "about.tl.school.e": "ورود به [DENTAL SCHOOL]",
     "about.tl.school.n": "آغاز دورهٔ دندانپزشکی، با تمرکز بر دندانپزشکی عمومی و مراقبت‌های اولیه.",
-    "about.tl.grad.y": "[YEAR GRADUATED]",
     "about.tl.grad.e": "اخذ مدرک د.م.د.",
     "about.tl.grad.n": "پایان دورهٔ دکترای دندانپزشکی. آغاز سال‌های نخست طبابت در [REGION].",
-    "about.tl.specialty.y": "[YEAR SPECIALTY]",
-    "about.tl.specialty.e": "دورهٔ تخصصی [SPECIALTY]",
     "about.tl.specialty.n": "آموزش پیشرفته در حوزهٔ تخصصی، با تمرکز بر دندانپزشکی پیشگیرانه و کودکان.",
     "about.tl.teaching.y": "۱۳۷۵ تا ۱۳۸۷",
-    "about.tl.teaching.e": "تدریس در [UNIVERSITY]",
     "about.tl.teaching.n": "مدرس مدعو در دروس بهداشت دهان و دندانپزشکی پیشگیرانه.",
     "about.tl.clinic.y": "از ۱۳۷۰ تا کنون",
     "about.tl.clinic.e": "طبابت بالینی در مهاباد",
@@ -127,7 +119,7 @@ const STR = {
 
     "about.langs.list": "کردی سورانی (زبان مادری) · فارسی (روان) · انگلیسی (بالینی) · عربی (مکاتباتی)",
     "about.memberships.list": "[انجمن دندانپزشکان ایران، شمارهٔ نظام پزشکی] · [انجمن دندانپزشکی کودکان] · [بازنگرنده، نشریهٔ علمی]",
-    "about.contact.line": "[CLINIC ADDRESS]، مهاباد، ایران · تلفن: [CLINIC PHONE] · ایمیل: [CONTACT EMAIL]",
+    "about.contact.line": "، مهاباد، ایران · تلفن:  · ایمیل: ",
 
     // Curriculum index
     "curr.crumb": "خانه / برنامهٔ آموزشی",
@@ -330,8 +322,6 @@ const STR = {
     "foot.about.p": "Apex Dental Journal is a peer-reviewed publication focused on preventive and evidence-based dentistry. Edited by Dr. Tofigh Sedighi.",
     "foot.nav.title": "Navigation",
     "foot.contact.title": "Contact",
-    "foot.contact.email": "Email: [CONTACT EMAIL]",
-    "foot.contact.address": "Address: [CLINIC ADDRESS], Mahabad",
     "foot.colophon": "© 2026 Apex Dental Journal. Content is for public education and is not a substitute for clinical examination.",
     "foot.heritage": "Built in honour of the heritage of Mahabad and Kurdistan",
 
@@ -351,17 +341,11 @@ const STR = {
     "about.tl.1964.y": "1964 / 1343",
     "about.tl.1964.e": "Born in Mahabad",
     "about.tl.1964.n": "Birthplace at the cultural heart of Iranian Kurdistan. A childhood in a home that valued education, poetry, and patient conversation.",
-    "about.tl.school.y": "[YEAR ENROLLED]",
-    "about.tl.school.e": "Enrolled at [DENTAL SCHOOL]",
     "about.tl.school.n": "Beginning of formal dental training, with a focus on general dentistry and primary care.",
-    "about.tl.grad.y": "[YEAR GRADUATED]",
     "about.tl.grad.e": "Awarded D.M.D.",
     "about.tl.grad.n": "Completion of doctoral training. Early years of practice in [REGION].",
-    "about.tl.specialty.y": "[YEAR SPECIALTY]",
-    "about.tl.specialty.e": "Advanced study in [SPECIALTY]",
     "about.tl.specialty.n": "Post-graduate study focused on preventive and paediatric dentistry.",
     "about.tl.teaching.y": "1996 to 2008",
-    "about.tl.teaching.e": "Adjunct instructor at [UNIVERSITY]",
     "about.tl.teaching.n": "Invited lectures in oral health and preventive dentistry.",
     "about.tl.clinic.y": "1991 to present",
     "about.tl.clinic.e": "Clinical practice, Mahabad",
@@ -383,7 +367,7 @@ const STR = {
 
     "about.langs.list": "Kurdish Sorani (native) · Persian (fluent) · English (clinical) · Arabic (correspondence)",
     "about.memberships.list": "[Iranian Dental Association, registry no. ____] · [Society for Paediatric Dentistry] · [Reviewer, scholarly journal]",
-    "about.contact.line": "[CLINIC ADDRESS], Mahabad, Iran · Phone: [CLINIC PHONE] · Email: [CONTACT EMAIL]",
+    "about.contact.line": ", Mahabad, Iran · Phone:  · Email: ",
 
     // Curriculum
     "curr.crumb": "Home / Curriculum",
@@ -581,8 +565,6 @@ const STR = {
     "foot.about.p": "گۆڤاری ددانسازی ئەپێکس بڵاوکراوەیەکی پێداچوونەوەکراوە کە بایەخ بە پێشگیری و ددانسازی لەسەر بنەمای بەڵگە دەدات. سەرنووسەری: د. توفیق سدیقی.",
     "foot.nav.title": "ڕێبەری",
     "foot.contact.title": "پەیوەندی",
-    "foot.contact.email": "ئیمەیڵ: [CONTACT EMAIL]",
-    "foot.contact.address": "ناونیشان: [CLINIC ADDRESS]، مەهاباد",
     "foot.colophon": "© ٢٠٢٦ گۆڤاری ددانسازی ئەپێکس. ناوەڕۆک بۆ پەروەردەی گشتی یە و جێگرەوەی پشکنینی کلینیکی نییە.",
     "foot.heritage": "بە ڕێزەوە بۆ میراتی مەهاباد و کوردستان",
 
@@ -602,17 +584,11 @@ const STR = {
     "about.tl.1964.y": "١٩٦٤ / ١٣٤٣",
     "about.tl.1964.e": "لەدایکبوون لە مەهاباد",
     "about.tl.1964.n": "شوێنی لەدایکبوون لە دڵی کوردستانی ئێران. منداڵی لە ماڵێکی نرخدار بە پەروەردە، شیعر و گفتوگۆی نەخۆش.",
-    "about.tl.school.y": "[YEAR ENROLLED]",
-    "about.tl.school.e": "چوون بۆ [DENTAL SCHOOL]",
     "about.tl.school.n": "دەستپێکی فێرکاری فەرمی ددانسازی، لەگەڵ سەرنج لە ددانسازی گشتی و چاودێری سەرەتایی.",
-    "about.tl.grad.y": "[YEAR GRADUATED]",
     "about.tl.grad.e": "وەرگرتنی د.م.د.",
     "about.tl.grad.n": "تەواوبوونی خوێندنی دکتۆرا. ساڵانی یەکەمی کارکردن لە [REGION].",
-    "about.tl.specialty.y": "[YEAR SPECIALTY]",
-    "about.tl.specialty.e": "خوێندنی پێشکەوتوو لە [SPECIALTY]",
     "about.tl.specialty.n": "خوێندنی پاش بڕوانامە لەگەڵ سەرنج لە ددانسازی پێشگیری و منداڵان.",
     "about.tl.teaching.y": "١٩٩٦ بۆ ٢٠٠٨",
-    "about.tl.teaching.e": "مامۆستای میوان لە [UNIVERSITY]",
     "about.tl.teaching.n": "گەشت و وانەی بانگهێشتکراو لە تەندروستی دەم و ددانسازی پێشگیری.",
     "about.tl.clinic.y": "١٩٩١ بۆ ئێستا",
     "about.tl.clinic.e": "کاری کلینیکی لە مەهاباد",
@@ -634,7 +610,7 @@ const STR = {
 
     "about.langs.list": "کوردی سۆرانی (زبانی دایک) · فارسی (ڕەوان) · ئینگلیزی (کلینیکی) · عەرەبی (نامەنووسی)",
     "about.memberships.list": "[کۆمەڵەی ددانسازانی ئێران، ژمارەی تۆمار ____] · [کۆمەڵەی ددانسازی منداڵان] · [پێداچوونەوەکار، گۆڤاری زانستی]",
-    "about.contact.line": "[CLINIC ADDRESS]، مەهاباد، ئێران · تەلەفۆن: [CLINIC PHONE] · ئیمەیڵ: [CONTACT EMAIL]",
+    "about.contact.line": "، مەهاباد، ئێران · تەلەفۆن:  · ئیمەیڵ: ",
 
     // Curriculum
     "curr.crumb": "ماڵەوە / بەرنامەی فێرکاری",
