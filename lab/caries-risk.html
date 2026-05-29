@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f6e6c">
+  <title>Caries Risk - Apex Lab</title>
+  <meta name="description" content="Six-question caries risk self-check. Low/moderate/high tier with plain-language recommendations.">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=Estedad:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="stylesheet" href="../assets/header.css">
+  <script defer src="../assets/header.js"></script>
+  <style>
+    .cr{max-width:780px;margin:0 auto;padding:64px 24px 96px;color:#1c2526}
+    .cr-eye{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#0f6e6c;margin-bottom:18px}
+    .cr-h1{font-family:'Newsreader',serif;font-size:clamp(36px,5vw,60px);font-weight:700;line-height:1.05;letter-spacing:-.02em;margin:0 0 18px}
+    .cr-lede{font-size:17px;line-height:1.55;color:#5a6566;max-width:54ch;margin:0 0 40px}
+    .cr-q{padding:24px 0;border-top:1px solid rgba(15,110,108,.14)}
+    .cr-q-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;color:#0f6e6c;margin-bottom:8px}
+    .cr-q-ask{font-family:'Newsreader',serif;font-size:19px;line-height:1.4;color:#1c2526;margin:0 0 16px;font-weight:500}
+    .cr-opts{display:flex;flex-direction:column;gap:8px}
+    .cr-opt{display:flex;align-items:center;gap:12px;padding:12px 16px;background:#fafaf7;border:1px solid rgba(15,110,108,.1);border-radius:6px;cursor:pointer;min-height:44px;font-size:15px}
+    .cr-opt:hover{border-color:rgba(15,110,108,.3)}
+    .cr-opt.is-on{background:#0f6e6c;color:#fdfcf8;border-color:#0f6e6c}
+    .cr-opt input{accent-color:#0f6e6c;width:18px;height:18px;flex-shrink:0}
+    .cr-btn{appearance:none;background:#0f6e6c;color:#fdfcf8;border:0;padding:14px 28px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;border-radius:6px;cursor:pointer;min-height:48px;letter-spacing:.04em;margin-top:32px}
+    .cr-btn:hover{background:#0c5856}
+    .cr-result{display:none;margin-top:36px;padding:32px;background:#fafaf7;border-left:4px solid #0f6e6c;border-radius:0 8px 8px 0}
+    .cr-result.show{display:block}
+    .cr-result.warn{border-left-color:#d97706}
+    .cr-result.bad{border-left-color:#dc2626}
+    .cr-tier{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;font-weight:500;color:#0f6e6c;margin-bottom:10px}
+    .cr-tier.warn{color:#d97706}.cr-tier.bad{color:#dc2626}
+    .cr-result h2{font-family:'Newsreader',serif;font-size:22px;font-weight:600;letter-spacing:-.01em;margin:0 0 14px}
+    .cr-result ul{margin:0;padding-left:24px;font-size:15px;line-height:1.65;color:#1c2526}
+    .cr-result li{margin-bottom:6px}
+    .cr-disclaim{font-size:12px;color:#5a6566;text-align:center;padding-top:18px;border-top:1px solid rgba(15,110,108,.14);margin-top:36px;font-style:italic}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="cr">
+      <div class="cr-eye">LAB / CARIES RISK</div>
+      <h1 class="cr-h1">Six questions, one risk tier.</h1>
+      <p class="cr-lede">A working estimate of how the next twelve months are likely to go for your teeth. The point is not to scare you; the point is to know which two habits matter most for you specifically.</p>
+
+      <form id="crForm">
+        <div class="cr-q">
+          <div class="cr-q-num">01 / SUGAR FREQUENCY</div>
+          <p class="cr-q-ask">How often do you have something sweet or sugary (drinks, snacks, fruit juice)?</p>
+          <div class="cr-opts">
+            <label class="cr-opt"><input type="radio" name="q1" value="0"> Rarely, only with meals</label>
+            <label class="cr-opt"><input type="radio" name="q1" value="1"> A few times a week</label>
+            <label class="cr-opt"><input type="radio" name="q1" value="2"> Daily, between meals</label>
+            <label class="cr-opt"><input type="radio" name="q1" value="3"> Multiple times a day, often sipped slowly</label>
+          </div>
+        </div>
+        <div class="cr-q">
+          <div class="cr-q-num">02 / BRUSHING</div>
+          <p class="cr-q-ask">How often do you brush thoroughly (full 2 minutes, fluoride toothpaste)?</p>
+          <div class="cr-opts">
+            <label class="cr-opt"><input type="radio" name="q2" value="0"> Twice a day, every day</label>
+            <label class="cr-opt"><input type="radio" name="q2" value="1"> Twice a day most days, sometimes rushed</label>
+            <label class="cr-opt"><input type="radio" name="q2" value="2"> Once a day</label>
+            <label class="cr-opt"><input type="radio" name="q2" value="3"> Inconsistently, or without fluoride paste</label>
+          </div>
+        </div>
+        <div class="cr-q">
+          <div class="cr-q-num">03 / FLUORIDE EXPOSURE</div>
+          <p class="cr-q-ask">Beyond brushing, do you get fluoride from drinking water or mouthwash?</p>
+          <div class="cr-opts">
+            <label class="cr-opt"><input type="radio" name="q3" value="0"> Yes - fluoridated tap water + occasional rinse</label>
+            <label class="cr-opt"><input type="radio" name="q3" value="1"> One of the two</label>
+            <label class="cr-opt"><input type="radio" name="q3" value="2"> Neither - bottled or filtered water only</label>
+          </div>
+        </div>
+        <div class="cr-q">
+          <div class="cr-q-num">04 / DRY MOUTH</div>
+          <p class="cr-q-ask">Do you experience dry mouth (medications, mouth-breathing at night, dehydration)?</p>
+          <div class="cr-opts">
+            <label class="cr-opt"><input type="radio" name="q4" value="0"> No, mouth feels normal</label>
+            <label class="cr-opt"><input type="radio" name="q4" value="1"> Sometimes - mornings or after exercise</label>
+            <label class="cr-opt"><input type="radio" name="q4" value="2"> Often - including from a medication</label>
+          </div>
+        </div>
+        <div class="cr-q">
+          <div class="cr-q-num">05 / PRIOR CARIES</div>
+          <p class="cr-q-ask">Have you had a new cavity diagnosed in the last 3 years?</p>
+          <div class="cr-opts">
+            <label class="cr-opt"><input type="radio" name="q5" value="0"> None</label>
+            <label class="cr-opt"><input type="radio" name="q5" value="1"> One</label>
+            <label class="cr-opt"><input type="radio" name="q5" value="3"> Two or more</label>
+          </div>
+        </div>
+        <div class="cr-q">
+          <div class="cr-q-num">06 / LAST DENTAL VISIT</div>
+          <p class="cr-q-ask">When was your last dental check?</p>
+          <div class="cr-opts">
+            <label class="cr-opt"><input type="radio" name="q6" value="0"> Within 6 months</label>
+            <label class="cr-opt"><input type="radio" name="q6" value="1"> 6 to 18 months ago</label>
+            <label class="cr-opt"><input type="radio" name="q6" value="2"> More than 18 months ago</label>
+          </div>
+        </div>
+
+        <button type="button" class="cr-btn" id="goBtn">See your risk tier</button>
+      </form>
+
+      <div class="cr-result" id="result">
+        <div class="cr-tier" id="tierLbl">RISK</div>
+        <h2 id="title">-</h2>
+        <ul id="recs"></ul>
+      </div>
+
+      <div class="cr-disclaim">This tool does not replace clinical advice.</div>
+    </div>
+  </main>
+
+<script>
+(function(){
+  document.querySelectorAll('.cr-opts').forEach(function(grp){
+    grp.addEventListener('change', function(){
+      grp.querySelectorAll('.cr-opt').forEach(function(o){ o.classList.toggle('is-on', o.querySelector('input').checked); });
+    });
+  });
+  document.getElementById('goBtn').addEventListener('click', function(){
+    var f = new FormData(document.getElementById('crForm'));
+    var total = 0, missing = false;
+    ['q1','q2','q3','q4','q5','q6'].forEach(function(k){
+      var v = f.get(k); if (v === null) missing = true; else total += parseInt(v,10);
+    });
+    if (missing) { alert('Answer all 6 questions.'); return; }
+    var tier, recs;
+    if (total <= 3) {
+      tier = ['low', 'Low risk', 'Your habits look protective. Keep the routine, plus:'];
+      recs = ['Continue twice-daily brushing with fluoride paste (1450 ppm).',
+              'Daily interdental cleaning.',
+              'Routine 6 to 12-month cleanings.',
+              'Do not sip sweet drinks slowly - have them with a meal and rinse with water after.'];
+    } else if (total <= 7) {
+      tier = ['mod', 'Moderate risk', 'Two to three changes will shift this back toward low:'];
+      recs = ['Reduce between-meal sugar exposures. Front-load sweet things at mealtimes.',
+              'Switch to a high-fluoride toothpaste (1450 to 5000 ppm) for the next 6 months - ask your dentist about prescription strength.',
+              'Add a daily fluoride mouth rinse, separated from brushing by at least 30 minutes.',
+              'Book a cleaning within 3 months if you have not had one in the last year.'];
+    } else {
+      tier = ['high', 'High risk', 'Multiple risk factors are stacking. The next 12 months matter:'];
+      recs = ['Book a dental exam in the next 4 weeks - even if nothing hurts.',
+              'Discuss high-fluoride toothpaste (5000 ppm), CPP-ACP paste, and dental sealants for any vulnerable molars.',
+              'Daily interdental cleaning + fluoride mouth rinse.',
+              'Cut between-meal sugar exposures to zero for at least 60 days.',
+              'If dry mouth is from a medication, ask your prescriber and dentist about saliva substitutes or alternative drugs.'];
+    }
+    var resEl = document.getElementById('result');
+    resEl.className = 'cr-result show' + (tier[0] === 'low' ? '' : (tier[0] === 'mod' ? ' warn' : ' bad'));
+    var lblEl = document.getElementById('tierLbl');
+    lblEl.className = 'cr-tier' + (tier[0] === 'low' ? '' : (tier[0] === 'mod' ? ' warn' : ' bad'));
+    lblEl.textContent = tier[1].toUpperCase() + ' - SCORE ' + total + ' / 14';
+    document.getElementById('title').textContent = tier[2];
+    document.getElementById('recs').innerHTML = recs.map(function(r){ return '<li>' + r + '</li>'; }).join('');
+    resEl.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+})();
+</script>
+</body>
+</html>
