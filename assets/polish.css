@@ -1,0 +1,167 @@
+/* ============================================================
+   Apex polish layer - clinical journal identity overlay
+   Applied on top of existing site styles. Loads alongside
+   styles.css + header.css. Goal: structured data-led layout,
+   Inter Display weight 700 headlines, hairline rules,
+   tight rhythm, no decorative flourishes.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --ap-clinical-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --ap-clinical-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* Display headlines: Inter Display, heavy weight, tight tracking */
+h1, .hero h1, [class*="-h1"], .page-head h1, [class*="-title"]:not(.brand-name) {
+  font-family: var(--ap-clinical-sans) !important;
+  font-weight: 800 !important;
+  letter-spacing: -.025em !important;
+  line-height: 1.04 !important;
+  text-wrap: balance;
+}
+
+/* Section sub-headings */
+h2, [class*="-h2"], section h2 {
+  font-family: var(--ap-clinical-sans) !important;
+  font-weight: 700 !important;
+  letter-spacing: -.02em !important;
+}
+h3 {
+  font-family: var(--ap-clinical-sans) !important;
+  font-weight: 600 !important;
+  letter-spacing: -.015em !important;
+}
+
+/* Strip serif fonts from body too - clinical sans throughout */
+p, li, dt, dd, td, th, label, input, textarea {
+  font-family: var(--ap-clinical-sans) !important;
+}
+
+/* Hairline grid rules - replace any thick borders */
+hr, .hr, .divider {
+  border: 0 !important;
+  border-top: 1px solid rgba(15, 110, 108, .14) !important;
+  max-width: 100% !important;
+  margin-block: 48px !important;
+}
+
+/* Replace section spacers with hairline rules */
+section + section,
+section + article,
+article + section {
+  border-top: 1px solid rgba(15, 110, 108, .08);
+}
+
+/* Tighten list rhythm */
+ul, ol {
+  padding-left: 22px;
+}
+ul li, ol li {
+  padding: 6px 0;
+  line-height: 1.55;
+}
+
+/* Tables: clinical journal density */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--ap-clinical-sans) !important;
+  font-size: 14px;
+}
+table thead th {
+  font-family: var(--ap-clinical-mono) !important;
+  font-size: 10.5px !important;
+  font-weight: 500 !important;
+  letter-spacing: .18em !important;
+  text-transform: uppercase !important;
+  color: #0f6e6c;
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid rgba(15, 110, 108, .2);
+  background: #fafaf7;
+}
+table tbody td {
+  padding: 11px 14px;
+  border-bottom: 1px solid rgba(15, 110, 108, .06);
+}
+table tbody tr:hover td { background: rgba(15, 110, 108, .03); }
+
+/* Eyebrow / kicker style */
+.eyebrow, .kicker, .ab-kicker, .ph-kicker, [class*="-eyebrow"], [class*="-kicker"] {
+  font-family: var(--ap-clinical-mono) !important;
+  font-size: 11px !important;
+  letter-spacing: .32em !important;
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+  color: #0f6e6c !important;
+}
+
+/* Section numbers - bold, structured */
+.section-num {
+  font-family: var(--ap-clinical-mono) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: .24em !important;
+  color: #0f6e6c !important;
+}
+
+/* Buttons: flat clinical, no rounded blobs */
+.btn, button.btn, .nav-btn, .btn-primary, .btn-ghost {
+  border-radius: 4px !important;
+  font-family: var(--ap-clinical-sans) !important;
+  font-weight: 600 !important;
+  letter-spacing: .02em !important;
+  text-transform: none !important;
+}
+
+/* Remove italic/decorative type from body text */
+p em, li em {
+  font-style: normal !important;
+  font-weight: 600;
+  color: #0f6e6c;
+}
+
+/* Bio-hero portraits: small inline, not centerpiece */
+.bio-hero, .portrait {
+  background: #fafaf7 !important;
+  border: 1px solid rgba(15, 110, 108, .14) !important;
+  border-radius: 4px !important;
+  color: #0f6e6c;
+}
+
+/* Quiet down the old call-to-action splashes */
+.cta-row, .actions, .hero-actions {
+  margin-top: 32px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Disable decorative animations on this side - the clinical feel
+   wants stillness, not motion. Smooth scroll only. */
+.reveal, [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* One subtle fade-in on initial page load to feel polished */
+  main {
+    animation: ap-fade .5s ease-out both;
+  }
+  @keyframes ap-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
+
+/* Print stylesheet for the clinical "official document" feel */
+@media print {
+  body { background: #fff !important; color: #000 !important; }
+  header, footer, nav { display: none !important; }
+  h1 { font-size: 28pt !important; }
+  h2 { font-size: 18pt !important; border-bottom: 1px solid #000; padding-bottom: 6px; }
+  p { font-size: 11pt !important; line-height: 1.5; }
+}
